@@ -3,6 +3,14 @@ class TodolistsController < ApplicationController
       @list = List.new
   end
 
+  def create
+    list = List.new(list_params)
+
+    list.save
+
+    redirect_to todolist_path(list.id)
+  end
+
 
 
   def index
@@ -13,12 +21,13 @@ class TodolistsController < ApplicationController
     @list = List.find(params[:id])
   end
 
+  def edit
+    @list = List.find(params[:id])
+  end
 
-  def create
-    list = List.new(list_params)
-
-    list.save
-
+  def update
+    list = List.find(params[:id])
+    list.update(list_params)
     redirect_to todolist_path(list.id)
   end
 
